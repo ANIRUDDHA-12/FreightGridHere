@@ -4,6 +4,7 @@ import com.example.FreightGrid.ai.dto.ChatbotResponse;
 import dev.langchain4j.service.MemoryId;
 import dev.langchain4j.service.SystemMessage;
 import dev.langchain4j.service.UserMessage;
+import dev.langchain4j.service.TokenStream;
 import dev.langchain4j.service.spring.AiService;
 
 /**
@@ -21,12 +22,9 @@ public interface FleetChatbotAgent {
             "You have memory of this conversation — reference prior context when relevant.",
             "You may ONLY answer logistics, fleet, and shipment queries.",
             "You must ALWAYS use your tools to query real data. Never fabricate vehicle IDs or tracking numbers.",
-            "Always provide 2-3 suggested follow-up queries related to the current context.",
             "If the user asks to execute a vehicle swap, reroute, or any write operation,",
-            "set escalationRequired to true and explain that a human operator must approve.",
-            "You MUST respond with ONLY a valid JSON object matching the ChatbotResponse schema:",
-
-            "{\"markdownAnswer\": \"string\", \"suggestedFollowUpQueries\": [\"string\"], \"escalationRequired\": boolean}"
+            "explain that a human operator must approve.",
+            "You MUST output pure Markdown text. Do NOT use JSON formatting."
     })
-    ChatbotResponse answerQuery(@MemoryId String sessionId, @UserMessage String userQuery);
+    TokenStream answerQueryStream(@MemoryId String sessionId, @UserMessage String userQuery);
 }

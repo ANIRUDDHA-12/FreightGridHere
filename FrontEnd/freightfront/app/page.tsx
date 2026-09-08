@@ -1,8 +1,13 @@
 // import Image from "next/image";
-import {AssetSlider} from "@/app/components/ui/assest-slider";
+import { BackgroundPaths } from "./components/ui/background-path";
+import  DashboardPage from "./dashboard/page"
 
 export default function Home() {
   return (
-   <AssetSlider />
+    <main className="w-full min-h-screen bg-black">
+      {/*<BackgroundPaths  title="FreightGrid" />*/}
+        <DashboardPage />
+    </main>
+  
   );
 }
